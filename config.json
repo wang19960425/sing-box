@@ -5,7 +5,7 @@
   },
   "experimental": {
     "clash_api": {
-      "external_controller": "0.0.0.0:9090",
+      "external_controller": "127.0.0.1:9090",
       "external_ui": "ui",
       "secret": "",
       "external_ui_download_url": "https://gh-proxy.com/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
@@ -119,17 +119,6 @@
         "auto",
         "direct"
       ]
-    },
-    {
-      "tag": "Gemini",
-      "type": "selector",
-      "outbounds": [
-        "America",
-        "Singapore",
-        "Japan",
-        "Others"
-      ],
-      "default": "America"
     },
     {
       "tag": "OpenAI",
@@ -445,10 +434,6 @@
         "outbound": "direct"
       },
       {
-        "rule_set": "geosite-ai",
-        "outbound": "Gemini"
-      },
-      {
         "rule_set": "geosite-openai",
         "outbound": "OpenAI"
       },
@@ -553,13 +538,6 @@
         "type": "remote",
         "format": "binary",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ads-all.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "geosite-ai",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ai-chat-!cn.srs",
         "download_detour": "direct"
       },
       {
