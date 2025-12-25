@@ -422,7 +422,7 @@
         "outbound": "direct"
       },
       {
-        "rule_set": "geosite-gemini",
+        "rule_set": "geosite-ai",
         "outbound": "Gemini"
       },
       {
@@ -533,10 +533,10 @@
         "download_detour": "direct"
       },
       {
-      "tag": "geosite-gemini",
+      "tag": "geosite-ai",
       "type": "remote",
       "format": "binary",
-      "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/gemini.srs",
+      "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ai-chat-!cn.srs",
       "download_detour": "direct"
       },
       {
