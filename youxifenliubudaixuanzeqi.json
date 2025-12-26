@@ -1,0 +1,342 @@
+{
+  "log": {
+    "level": "info",
+    "timestamp": true,
+    "output": "/etc/sing-box/sing-box.log"
+  },
+  "DNS": {
+    "servers": [
+      {"tag": "DNS1-pc1", "type": "https", "server": "223.5.5.5", "detour": "1-pc1"},
+      {"tag": "DNS1-pc2", "type": "https", "server": "223.5.5.5", "detour": "1-pc2"},
+      {"tag": "DNS1-pc3", "type": "https", "server": "223.5.5.5", "detour": "1-pc3"},
+      {"tag": "DNS1-pc4", "type": "https", "server": "223.5.5.5", "detour": "1-pc4"},
+      {"tag": "DNS1-pc5", "type": "https", "server": "223.5.5.5", "detour": "1-pc5"},
+      {"tag": "DNS1-pc6", "type": "https", "server": "223.5.5.5", "detour": "1-pc6"},
+      {"tag": "DNS1-pc7", "type": "https", "server": "223.5.5.5", "detour": "1-pc7"},
+      {"tag": "DNS1-pc8", "type": "https", "server": "223.5.5.5", "detour": "1-pc8"},
+      {"tag": "DNS1-pc9", "type": "https", "server": "223.5.5.5", "detour": "1-pc9"},
+
+      {"tag": "DNS2-pc1", "type": "https", "server": "223.5.5.5", "detour": "2-pc1"},
+      {"tag": "DNS2-pc2", "type": "https", "server": "223.5.5.5", "detour": "2-pc2"},
+      {"tag": "DNS2-pc3", "type": "https", "server": "223.5.5.5", "detour": "2-pc3"},
+      {"tag": "DNS2-pc4", "type": "https", "server": "223.5.5.5", "detour": "2-pc4"},
+      {"tag": "DNS2-pc5", "type": "https", "server": "223.5.5.5", "detour": "2-pc5"},
+      {"tag": "DNS2-pc6", "type": "https", "server": "223.5.5.5", "detour": "2-pc6"},
+      {"tag": "DNS2-pc7", "type": "https", "server": "223.5.5.5", "detour": "2-pc7"},
+      {"tag": "DNS2-pc8", "type": "https", "server": "223.5.5.5", "detour": "2-pc8"},
+      {"tag": "DNS2-pc9", "type": "https", "server": "223.5.5.5", "detour": "2-pc9"},
+
+      {"tag": "direct-dns","type": "udp","server": "223.5.5.5"},
+      {"tag": "block-dns","type": "udp","server": "0.0.0.0"}
+    ],
+    "rules": [
+      {"source_ip_cidr": ["192.168.9.0/24"], "server": "direct-dns"},
+    
+      {"source_ip_cidr": ["172.16.1.0/24"], "server": "DNS1-pc1"},
+      {"source_ip_cidr": ["172.16.2.0/24"], "server": "DNS1-pc2"},
+      {"source_ip_cidr": ["172.16.3.0/24"], "server": "DNS1-pc3"},
+      {"source_ip_cidr": ["172.16.4.0/24"], "server": "DNS1-pc4"},
+      {"source_ip_cidr": ["172.16.5.0/24"], "server": "DNS1-pc5"},
+      {"source_ip_cidr": ["172.16.6.0/24"], "server": "DNS1-pc6"},
+      {"source_ip_cidr": ["172.16.7.0/24"], "server": "DNS1-pc7"},
+      {"source_ip_cidr": ["172.16.8.0/24"], "server": "DNS1-pc8"},
+      {"source_ip_cidr": ["172.16.9.0/24"], "server": "DNS1-pc9"},
+
+      {"source_ip_cidr": ["172.16.10.0/24"], "server": "DNS2-pc1"},
+      {"source_ip_cidr": ["172.16.11.0/24"], "server": "DNS2-pc2"},
+      {"source_ip_cidr": ["172.16.12.0/24"], "server": "DNS2-pc3"},
+      {"source_ip_cidr": ["172.16.13.0/24"], "server": "DNS2-pc4"},
+      {"source_ip_cidr": ["172.16.14.0/24"], "server": "DNS2-pc5"},
+      {"source_ip_cidr": ["172.16.15.0/24"], "server": "DNS2-pc6"},
+      {"source_ip_cidr": ["172.16.16.0/24"], "server": "DNS2-pc7"},
+      {"source_ip_cidr": ["172.16.17.0/24"], "server": "DNS2-pc8"},
+      {"source_ip_cidr": ["172.16.18.0/24"], "server": "DNS2-pc9"}
+    ],
+    "final": "block-dns", 
+    "strategy": "ipv4_only",
+    "independent_cache": true,
+    "cache_capacity": 4096,
+    "disable_expire": false
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "mtu": 1360,
+      "address": ["172.19.0.1/30"],
+      "auto_route": true,
+      "auto_redirect": true,
+      "strict_route": true,
+      "sniff": true,
+      "sniff_override_destination": false
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "socks",
+      "tag": "1-pc1",
+      "server": "106.52.97.224",
+      "server_port": 30001,
+      "username": "wang",
+      "password": "wxh5201314",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "1-pc2",
+      "server": "119.29.176.122",
+      "server_port": 30002,
+      "username": "wang",
+      "password": "wxh5201314",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "1-pc3",
+      "server": "43.138.254.70",
+      "server_port": 30003,
+      "username": "wang",
+      "password": "wxh5201314",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "1-pc4",
+      "server": "193.112.62.125",
+      "server_port": 30004,
+      "username": "wang",
+      "password": "wxh5201314",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "1-pc5",
+      "server": "43.138.168.237",
+      "server_port": 30005,
+      "username": "wang",
+      "password": "wxh5201314",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "1-pc6",
+      "server": "175.178.215.221",
+      "server_port": 30006,
+      "username": "wang",
+      "password": "wxh5201314",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "1-pc7",
+      "server": "43.138.138.66",
+      "server_port": 30007,
+      "username": "wang",
+      "password": "wxh5201314",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "1-pc8",
+      "server": "175.178.66.59",
+      "server_port": 30008,
+      "username": "wang",
+      "password": "wxh5201314",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "1-pc9",
+      "server": "175.178.13.166",
+      "server_port": 30009,
+      "username": "wang",
+      "password": "wxh5201314",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+
+    {
+      "type": "socks",
+      "tag": "2-pc1",
+      "server": "14.18.115.72",
+      "server_port": 2868,
+      "username": "gmlISR",
+      "password": "DTaUAzP2",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "2-pc2",
+      "server": "106.60.12.79",
+      "server_port": 9136,
+      "username": "hmoqW1605979",
+      "password": "0178",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "2-pc3",
+      "server": "171.214.2.207",
+      "server_port": 9105,
+      "username": "bdlHJ8605947",
+      "password": "1256",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "2-pc4",
+      "server": "106.63.10.165",
+      "server_port": 9103,
+      "username": "aksHP9605918",
+      "password": "0256",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "2-pc5",
+      "server": "113.250.186.159",
+      "server_port": 9106,
+      "username": "gowzS3605945",
+      "password": "1367",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "2-pc6",
+      "server": "114.107.239.191",
+      "server_port": 9136,
+      "username": "bckJTX605968",
+      "password": "0268",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "2-pc7",
+      "server": "114.96.99.140",
+      "server_port": 9141,
+      "username": "iptIQT605901",
+      "password": "2349",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "2-pc8",
+      "server": "182.40.96.109",
+      "server_port": 9118,
+      "username": "jCGP78605923",
+      "password": "0138",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {
+      "type": "socks",
+      "tag": "2-pc9",
+      "server": "183.56.253.83",
+      "server_port": 9101,
+      "username": "goHIMX605949",
+      "password": "1347",
+      "reuse_addr": true,
+      "tcp_fast_open": false,
+      "udp_over_tcp": false,
+      "connect_timeout": "5s"
+    },
+    {"type": "block","tag": "block"},
+    {"type": "direct","tag": "direct"}
+  ],
+  "route": {
+    "rules": [
+      {"protocol": "dns","action": "hijack-dns"},
+      {"domain": ["stun.l.google.com","stun.tencent.com"],"action": "reject"},
+      {"protocol": "quic","action": "reject"},
+      {"protocol": "udp","port": 443,"action": "reject"},
+      
+      {"source_ip_cidr": "192.168.9.0/24", "outbound": "direct"},
+
+      {"source_ip_cidr": "172.16.1.0/24", "outbound": "1-pc1"},
+      {"source_ip_cidr": "172.16.2.0/24", "outbound": "1-pc2"},
+      {"source_ip_cidr": "172.16.3.0/24", "outbound": "1-pc3"},
+      {"source_ip_cidr": "172.16.4.0/24", "outbound": "1-pc4"},
+      {"source_ip_cidr": "172.16.5.0/24", "outbound": "1-pc5"},
+      {"source_ip_cidr": "172.16.6.0/24", "outbound": "1-pc6"},
+      {"source_ip_cidr": "172.16.7.0/24", "outbound": "1-pc7"},
+      {"source_ip_cidr": "172.16.8.0/24", "outbound": "1-pc8"},
+      {"source_ip_cidr": "172.16.9.0/24", "outbound": "1-pc9"},
+      
+      {"source_ip_cidr": "172.16.10.0/24", "outbound": "2-pc1"},
+      {"source_ip_cidr": "172.16.11.0/24", "outbound": "2-pc2"},
+      {"source_ip_cidr": "172.16.12.0/24", "outbound": "2-pc3"},
+      {"source_ip_cidr": "172.16.13.0/24", "outbound": "2-pc4"},
+      {"source_ip_cidr": "172.16.14.0/24", "outbound": "2-pc5"},
+      {"source_ip_cidr": "172.16.15.0/24", "outbound": "2-pc6"},
+      {"source_ip_cidr": "172.16.16.0/24", "outbound": "2-pc7"},
+      {"source_ip_cidr": "172.16.17.0/24", "outbound": "2-pc8"},
+      {"source_ip_cidr": "172.16.18.0/24", "outbound": "2-pc9"}
+    ],
+    "final": "block", 
+    "auto_detect_interface": true,
+    "default_domain_resolver": "block-dns"
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "path": "/etc/sing-box/cache.db"
+    },
+    "clash_api": {
+      "external_controller": "0.0.0.0:9095",
+      "external_ui": "/etc/sing-box/ui",
+      "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
+      "external_ui_download_detour": "direct",
+      "secret": "Wxh5201314.+-",
+      "default_mode": "rule"
+    }
+  }
+}
